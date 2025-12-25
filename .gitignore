@@ -1,0 +1,75 @@
+# ===============================
+# Python bytecode / cache
+# ===============================
+__pycache__/
+*.py[cod]
+*.pyo
+
+# ===============================
+# Virtual environments
+# ===============================
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# ===============================
+# Packaging / build artifacts
+# ===============================
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# ===============================
+# Conda artifacts
+# ===============================
+conda-bld/
+*.tar.bz2
+
+# ===============================
+# Test & coverage outputs
+# ===============================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ===============================
+# Jupyter / notebooks
+# ===============================
+.ipynb_checkpoints/
+
+# ===============================
+# IDE / Editor files
+# ===============================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ===============================
+# OS-specific files
+# ===============================
+.DS_Store
+Thumbs.db
+
+# ===============================
+# Logs & temp files
+# ===============================
+*.log
+*.tmp
+
+# ===============================
+# R-related (reticulate / RStudio)
+# ===============================
+.Rhistory
+.RData
+.Rproj.user/
+
+# ===============================
+# Secrets (defensive)
+# ===============================
+.env
+.env.*
