@@ -14,6 +14,7 @@ for machine learning, analytics, and research workflows.
 
 ## Installation
 
+For Python Users: Run in notebook or IDE
 ```bash
 pip install ngpu
 ```
@@ -25,9 +26,13 @@ conda create -n ngpu-r -c conda-forge python=3.10 ngpu r-base r-reticulate panda
 This installs:
 
 Python
+
 ngpu
+
 R
+
 reticulate
+
 ML dependencies
 
 
@@ -37,7 +42,7 @@ ML dependencies
 from ngpu import Index, to_dataframe
 
 states = Index.states()
-lgas = Index.lgas("Lagos")
+lgas = Index.lgas("Anambra")
 
 df = to_dataframe()
 ```
@@ -143,7 +148,7 @@ ngpu_df = ngpu.to_dataframe()
 
 enriched = data.merge(ngpu_df, on="state", how="left")
 ```
-Result
+#### Result:
 
 All valid LGAs, wards, and polling units are added
 
@@ -165,7 +170,7 @@ encoded = encoder.fit_transform(
 
 print(encoded)
 ```
-Use case
+#### Use Case
 
 Converts hierarchy into numeric features
 
@@ -201,13 +206,13 @@ diag.validate(
     lga="Gwale"
 )
 ```
-Returns
+#### Returns:
 
 True → valid
 
 False → invalid
 
-Use case
+#### Use Case:
 
 Detect bad records before training
 
@@ -237,13 +242,13 @@ head(df_r)
 ```
 ⬆ Join ngpu data with survey, transaction, or demographic datasets.
 
-### Problem
+### Problem:
 
 You have a dataset with:
 state
 missing lga, ward, polling_unit
 
-### Solution (in R)
+### Solution:
 ```r
 library(dplyr)
 
@@ -265,16 +270,17 @@ Dataset is automatically expanded with valid LGAs, wards, and polling units.
 encoder <- ngpu$PollingUnitEncoder()
 
 encoded <- encoder$fit_transform(
-  state = "Lagos",
-  lga = "Ikeja",
-  ward = "Ward 1",
-  polling_unit = "PU 001"
+  state = "Taraba",
+  lga = "Jalingo",
+  ward = "Ward 7",
+  polling_unit = "PU 007"
 )
 
 print(encoded)
 ```
 Convert categorical hierarchy into numeric ML-ready features
-Used in regression, classification, clustering
+
+Used in regression, classification, and clustering.
 
 ### Use with caret/tidymodels
 ```r
@@ -303,7 +309,7 @@ diag$validate(
   lga = "Gwale"
 )
 ```
-Returns
+#### Returns:
 
 TRUE → valid
 
@@ -330,12 +336,4 @@ Ensure it points to ngpu-r.
 ## LICENSE
 
 MIT
-
-## Test execution
-
-```bash
-pip install -e .[dev]
-pytest
-```
-
 
