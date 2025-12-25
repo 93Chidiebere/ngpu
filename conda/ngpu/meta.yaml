@@ -1,0 +1,29 @@
+package:
+  name: ngpu
+  version: "0.1.0"
+
+source:
+  path: ../../
+
+build:
+  number: 0
+  script: bash build.sh
+
+requirements:
+  host:
+    - python >=3.9
+    - pip
+  run:
+    - python >=3.9
+    - pandas >=1.5
+    - scikit-learn >=1.2
+    - rapidfuzz >=3.0
+
+about:
+  home: https://github.com/93Chidiebere/ngpu
+  summary: Hierarchical polling unit intelligence for Nigeria (ML-ready)
+  license: MIT
+
+extra:
+  recipe-maintainers:
+    - your-github-username
