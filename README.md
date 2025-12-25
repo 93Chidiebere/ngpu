@@ -1,4 +1,4 @@
-# ngpu
+# Nigerian Polling Units
 
 **ngpu** is a Python library that provides hierarchical intelligence over
 Nigeria’s polling unit administrative structure, designed specifically
@@ -62,11 +62,8 @@ Any domain requiring stable Nigerian administrative anchors
 ## LICENSE
 
 MIT
-```yaml
 
----
-
-# 8. Test execution (CI-ready)
+## Test execution
 
 ```bash
 pip install -e .[dev]
