@@ -83,17 +83,151 @@ Civic tech and policy research
 
 Any domain requiring stable Nigerian administrative anchors
 
+## In Python
+
+List all states:
+```python
+from ngpu import Index
+
+states = Index.states()
+print(states)
+```
+⬆ Validate categorical values in incoming datasets.
+
+
+Get LGAs for a state:
+```python
+lgas = Index.lgas("Enugu")
+print(lgas)
+```
+⬆ Fill missing LGA values during data cleaning.
+
+
+Get wards and polling units
+```python
+wards = Index.wards("Enugu", "Awgu")
+pus = Index.polling_units("Enugu", "Awgu", "Ward 1")
+```
+⬆ Hierarchical drill-down analysis.
+
+
+Converting to a DataFrame:
+```python
+df = ngpu.to_dataframe()
+df.head()
+```
+Join with survey data
+
+Join with transaction data
+
+Feature engineering pipelines
+
+
+
+#### Problem
+
+Dataset contains:
+
+state
+Missing lga, ward, polling_unit
+
+#### Solution
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "state": ["Lagos", "Kano"]
+})
+
+ngpu_df = ngpu.to_dataframe()
+
+enriched = data.merge(ngpu_df, on="state", how="left")
+```
+Result
+
+All valid LGAs, wards, and polling units are added
+
+No manual mapping required
+
+## Machine Learning
+#### Hierarchical Encoding
+```python
+from ngpu.ml import PollingUnitEncoder
+
+encoder = PollingUnitEncoder()
+
+encoded = encoder.fit_transform(
+    state="Lagos",
+    lga="Ikeja",
+    ward="Ward 1",
+    polling_unit="PU 001"
+)
+
+print(encoded)
+```
+Use case
+
+Converts hierarchy into numeric features
+
+Compatible with scikit-learn models
+
+## ML Pipeline
+```python
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+
+X = ngpu_df[["state", "lga", "ward"]]
+y = ngpu_df["polling_unit"]
+
+encoder = PollingUnitEncoder()
+X_encoded = encoder.fit_transform_df(X)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X_encoded, y, test_size=0.2
+)
+
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+```
+
+### Data Validation & Diagnostics
+```python
+from ngpu.ml import HierarchyDiagnostics
+
+diag = HierarchyDiagnostics()
+
+diag.validate(
+    state="Lagos",
+    lga="Gwale"
+)
+```
+Returns
+
+True → valid
+
+False → invalid
+
+Use case
+
+Detect bad records before training
+
+Prevent invalid inference
+
+
+
+
+## In R
 ```r
 states <- ngpu$Index$states()
 print(states)
 ```
-Validate state names in a dataset before analysis.
+⬆ Validate state names in a dataset before analysis.
 
 ```r
 lgas <- ngpu$Index$lgas("Lagos")
 print(lgas)
 ```
-Fill missing LGAs when only state information exists.
+⬆ Fill missing LGAs when only state information exists.
 
 ```r
 df <- ngpu$to_dataframe()
@@ -101,7 +235,7 @@ df_r <- py_to_r(df)
 
 head(df_r)
 ```
-Join ngpu data with survey, transaction, or demographic datasets.
+⬆ Join ngpu data with survey, transaction, or demographic datasets.
 
 ### Problem
 
@@ -158,6 +292,8 @@ model <- train(
 ```
 Predict missing administrative attributes
 Learn regional patterns
+
+
 ### Data Validation & Diagnotstics
 ```r
 diag <- ngpu$HierarchyDiagnostics()
@@ -170,9 +306,10 @@ diag$validate(
 Returns
 
 TRUE → valid
+
 FALSE → impossible combination
 
-Use case:
+#### Use case:
 Catch data errors before modeling
 Prevent garbage-in-garbage-out ML
 
