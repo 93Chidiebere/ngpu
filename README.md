@@ -333,6 +333,13 @@ py_config()
 Ensure it points to ngpu-r.
 
 
+## Authors:
+
+#### MaryBlessing Umeh, Software Engineer
+
+#### Chidiebere V. Christopher, Data Scientist
+
+
 ## LICENSE
 
 MIT
