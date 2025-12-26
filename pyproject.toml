@@ -14,6 +14,10 @@ dependencies = [
   "rapidfuzz>=3.0"
 ]
 
+[tool.setuptools.packages.find]
+include = ["ngpu*"]
+exclude = ["conda*", "tests*"]
+
 [project.urls]
 Homepage = "https://github.com/93Chidiebere/ngpu"
 Issues = "https://github.com/93Chidiebere/ngpu/issues"
@@ -21,3 +25,4 @@ Issues = "https://github.com/93Chidiebere/ngpu/issues"
 [build-system]
 requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
+
